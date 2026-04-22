@@ -51,6 +51,9 @@
       <div class="becomeseller">
         <a href="#"><i class="fa-solid fa-store"></i>Become a Seller</a>
       </div>
+      <div class="mobile-menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
       <div class="more">
         <i class="fa-solid fa-ellipsis-vertical"></i>
         <div class="dropdown-content1">
@@ -561,6 +564,27 @@
 
 </body>
 <script>
+  // Mobile Menu Toggle
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const navContainer = document.querySelector('.nav-container');
+
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+      navContainer.classList.toggle('mobile-active');
+      mobileMenuToggle.classList.toggle('active');
+    });
+  }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navContainer.classList.contains('mobile-active') && 
+        !navContainer.contains(e.target) && 
+        !mobileMenuToggle.contains(e.target)) {
+      navContainer.classList.remove('mobile-active');
+      mobileMenuToggle.classList.remove('active');
+    }
+  });
+
   const track = document.querySelector('.carousel-track');
   const slides = Array.from(track.children);
   const nextBtn = document.querySelector('.carousel-btn.next');
@@ -605,7 +629,6 @@
     currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel(currentIndex);
   }, 5000);
-
 
 
   const carousel = document.querySelector('.section-3-container');
